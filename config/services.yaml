@@ -56,3 +56,9 @@ services:
       $authorFinder: '@author.finder'
     tags: [ 'console.command' ]
 
+  App\DataFixtures\AppFixtures:
+    arguments:
+      $mainUserLogin: '%env(MAIN_USER_LOGIN)%'
+      $mainUserPassword: '%env(MAIN_USER_PASSWORD)%'
+    tags: [ 'doctrine.fixture.orm' ]
+

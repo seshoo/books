@@ -18,12 +18,22 @@
     "symfony/flex": "^2",
     "symfony/framework-bundle": "6.4.*",
     "symfony/http-client": "6.4.*",
+    "symfony/monolog-bundle": "^3.0",
     "symfony/runtime": "6.4.*",
+    "symfony/security-bundle": "6.4.*",
     "symfony/translation-contracts": "*",
-    "symfony/yaml": "6.4.*"
+    "symfony/twig-bundle": "6.4.*",
+    "symfony/yaml": "6.4.*",
+    "twig/extra-bundle": "^2.12|^3.0",
+    "twig/twig": "^2.12|^3.0"
   },
   "require-dev": {
-    "symfony/maker-bundle": "^1.59"
+    "doctrine/doctrine-fixtures-bundle": "^3.6",
+    "symfony/debug-bundle": "6.4.*",
+    "symfony/maker-bundle": "^1.59",
+    "symfony/stopwatch": "6.4.*",
+    "symfony/web-profiler-bundle": "6.4.*",
+    "zenstruck/foundry": "^1.37"
   },
   "config": {
     "allow-plugins": {
