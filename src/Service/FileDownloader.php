@@ -12,11 +12,12 @@ use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class FileDownloader
+readonly class FileDownloader
 {
 
     public function __construct(
-        private string $publicUploadsDir,
+        private string $publicDir,
+        private string $uploadsDir,
         private HttpClientInterface $client,
         private Filesystem $filesystem
     ) {
@@ -43,7 +44,7 @@ class FileDownloader
             $prefix = $index === 0 ? '' : ++$index;
             $imageName = $this->generateFileName($url, $prefix);
             $folderName = substr($imageName, 0, 3);
-            $path = $this->publicUploadsDir . '/' . $folderName;
+            $path = $this->publicDir . $this->uploadsDir . '/' . $folderName;
             if (!$this->filesystem->exists($path)) {
                 $this->filesystem->mkdir($path);
             }
@@ -51,7 +52,7 @@ class FileDownloader
             if (!$this->filesystem->exists($filePath)) {
                 $this->filesystem->dumpFile($filePath, $imageData);
 
-                return $filePath;
+                return $this->uploadsDir . '/' . $folderName . '/' . $imageName;
             }
         }
     }
