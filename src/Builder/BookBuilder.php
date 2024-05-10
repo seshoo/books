@@ -17,7 +17,7 @@ class BookBuilder
         } catch (Exception) {
             $publishedDate = null;
         }
-        
+
         $book = new BookDto();
         $book->title = $item['title'];
         $book->isbn = $item['isbn'] ?? null;
@@ -27,8 +27,8 @@ class BookBuilder
         $book->shortDescription = $item['shortDescription'] ?? null;
         $book->longDescription = $item['longDescription'] ?? null;
         $book->status = $item['status'];
-        $book->authors = is_array($item['authors']) ? $item['authors'] : [];
-        $book->categories = is_array($item['categories']) ? $item['categories'] : [];
+        $book->authors = is_array($item['authors']) ? array_filter($item['authors']) : [];
+        $book->categories = is_array($item['categories']) ? array_filter($item['categories']) : [];
 
         return $book;
     }

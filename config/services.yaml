@@ -25,7 +25,33 @@ services:
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
 
+  cache.adapter.array.category:
+    parent: cache.adapter.array
+    arguments:
+      $storeSerialized: false
+
+  category.finder:
+    class: App\Service\FinderService
+    arguments:
+      $cache: '@cache.adapter.array.category'
+      $repository: '@App\Repository\CategoryRepository'
+
+  cache.adapter.array.author:
+    parent: cache.adapter.array
+    arguments:
+      $storeSerialized: false
+
+  author.finder:
+    class: App\Service\FinderService
+    arguments:
+      $cache: '@cache.adapter.array.author'
+      $repository: '@App\Repository\AuthorRepository'
+
   App\Command\ParseBookCommand:
     arguments:
       $dataLocation: '%kernel.project_dir%%env(JSON_DATA_PATH)%'
+      $defaultCategory: '%env(DEFAULT_CATEGORY)%'
+      $categoryFinder: '@category.finder'
+      $authorFinder: '@author.finder'
     tags: [ 'console.command' ]
+
